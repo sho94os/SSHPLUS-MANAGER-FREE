@@ -4,32 +4,32 @@ if [ -d "/etc/squid/" ]; then
 elif [ -d "/etc/squid3/" ]; then
 	payload="/etc/squid3/payload.txt"
 fi
-tput setaf 7 ; tput setab 4 ; tput bold ; printf '%35s%s%-10s\n' "Adicionar Host ao Squid Proxy" ; tput sgr0
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%35s%s%-10s\n' "Add Host to Squid Proxy" ; tput sgr0
 if [ ! -f "$payload" ]
 then
-	tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Arquivo $payload não encontrado" ; tput sgr0
+	tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Archive $payload not found" ; tput sgr0
 	exit 1
 else
-	tput setaf 2 ; tput bold ; echo ""; echo "Domínios atuais no arquivo $payload:" ; tput sgr0
+	tput setaf 2 ; tput bold ; echo ""; echo "Current domains in the $payload file:" ; tput sgr0
 	tput setaf 3 ; tput bold ; echo "" ; cat $payload ; echo "" ; tput sgr0
-	read -p "Digite o domínio que deseja adicionar a lista: " host
+	read -p "Enter the domain you want to add to the list: " host
 	if [[ -z $host ]]
 	then
-		tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou um domínio vazio ou não existente!" ; echo "" ; tput sgr0
+		tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "You entered an empty or non-existing domain!" ; echo "" ; tput sgr0
 		exit 1
 	else
 		if [[ `grep -c "^$host" $payload` -eq 1 ]]
 		then
-			tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "O domínio $host já existe no arquivo $payload" ; echo "" ; tput sgr0
+			tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "the $host domain already exists in $payload file" ; echo "" ; tput sgr0
 			exit 1
 		else
 			if [[ $host != \.* ]]
 			then
-				tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você deve adicionar um domínio iniciando-o com um ponto!" ; echo "Por exemplo: .phreaker56.xyz" ; echo "Não é necessário adicionar subdomínios para domínios que já estão no arquivo" ; echo "Ou seja, não é necessário adicionar recargawap.claro.com.br" ; echo "se o domínio .claro.com.br já estiver no arquivo." ; echo ""; tput sgr0
+				tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "You must add a domain by starting it with a period!" ; echo "For example: .phreaker56.xyz" ; echo "There is no need to add subdomains for domains that are already in the file" ; echo "That is, it is not necessary to add recargawap.claro.com.br" ; echo "if the .claro.com.br domain is already in the file." ; echo ""; tput sgr0
 				exit 1
 			else
 				echo "$host" >> $payload && grep -v "^$" $payload > /tmp/a && mv /tmp/a $payload
-				tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "Arquivo $payload atualizado, o domínio foi adicionado com sucesso:" ; tput sgr0
+				tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "Updated $payload file the domain was successfully added::" ; tput sgr0
 				tput setaf 3 ; tput bold ; echo "" ; cat $payload ; echo "" ; tput sgr0
 				if [ ! -f "/etc/init.d/squid3" ]
 				then
@@ -38,9 +38,20 @@ else
 				then
 					service squid reload
 				fi	
-				tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "O Proxy Squid Proxy foi recarregado com sucesso!" ; echo "" ; tput sgr0
+				tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "The Squid Proxy has been successfully reloaded!" ; echo "" ; tput sgr0
 				exit 1
 			fi
 		fi
 	fi
 fi
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
