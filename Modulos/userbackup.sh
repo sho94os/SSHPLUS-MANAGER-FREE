@@ -34,7 +34,7 @@ backbot=$1
 			done
 			tput cnorm
 		}
-		echo -ne "\033[1;33mAGUARDE\033[1;31m.\033[1;32m.\033[1;33m. \033[1;32m"
+		echo -ne "\033[1;33m WAIT\033[1;31m.\033[1;32m.\033[1;33m. \033[1;32m"
 		helice
 		echo -e "\e[1DOk"
 	}
@@ -59,17 +59,17 @@ backbot=$1
 			done
 			tput cnorm
 		}
-		echo -ne "\033[1;33mGERANDO LINK\033[1;31m.\033[1;32m.\033[1;33m. \033[1;32m"
+		echo -ne "\033[1;33m GENERATING LINK\033[1;31m.\033[1;32m.\033[1;33m. \033[1;32m"
 		helice
 		echo -e "\e[1DOk"
 	}
-	echo -e "\E[44;1;37m             Gerenciador De Backups              \E[0m"
+	echo -e "\E[44;1;37m             Backup Manager              \E[0m"
 	echo ""
-	echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mCRIAR BACKUP"
-	echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mRESTAURAR BACKUP"
-	echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[1;37m"
+	echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mCREATE BACKUP"
+	echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mRESTORE BACKUP"
+	echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mRETURN\033[1;37m"
 	echo ""
-	echo -ne "\033[1;32mOQUE DESEJA FAZER\033[1;31m ?\033[1;37m : "; read opcao
+	echo -ne "\033[1;32m WHAT DO YOU WANT TO DO \033[1;31m ?\033[1;37m : "; read opcao
 	if [[ "$opcao" = '1' ]]; then
 		if [ -f "/root/usuarios.db" ]
 		then
@@ -77,9 +77,9 @@ backbot=$1
 			sleep 1
 			tar cvf /root/backup.vps /root/usuarios.db /etc/shadow /etc/passwd /etc/group /etc/gshadow > /dev/null 2>&1
 			echo ""
-			echo -e "\033[1;32mBACKUP CRIADO COM SUCESSO !\033[0m"
+			echo -e "\033[1;32m BACKUP SUCCESSFULLY CREATED!\033[0m"
 			echo ""
-			echo -ne "\033[1;32mGERAR LINK PARA DOWNLOAD \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read resp
+			echo -ne "\033[1;32m GENERATE DOWNLOAD LINK \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read resp
 			if [[ "$resp" = "s" ]]; then
 				echo ""
 				fun_temp
@@ -93,10 +93,10 @@ backbot=$1
 						echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:81/backup/backup.vps\033[0m"
 					fi
 				else
-					echo -e "\033[1;32mDisponivel em\033[1;31m" ~/"backup.vps\033[0m"
+					echo -e "\033[1;32m Available in\033[1;31m" ~/"backup.vps\033[0m"
 				fi
 			else
-				echo -e "\n\033[1;32mDisponivel em\033[1;31m" ~/"backup.vps\033[0m"
+				echo -e "\n\033[1;32m Available in\033[1;31m" ~/"backup.vps\033[0m"
 				sleep 2
 				menu
 			fi
@@ -116,7 +116,7 @@ backbot=$1
 		if [ -f "/root/backup.vps" ]
 		then
 			echo ""
-			echo -e "\033[1;36mRestaurando backup..."
+			echo -e "\033[1;36m Restoring backup ..."
 			echo ""
 			sleep 2s
 			cp /root/backup.vps /backup.vps
@@ -124,13 +124,13 @@ backbot=$1
 			tar -xvf backup.vps
 			rm /backup.vps
 			echo ""
-			echo -e "\033[1;36mUsuários e\033[1;36m senhas importados com sucesso.\033[0m"
+			echo -e "\033[1;36m Users and\033[1;36m passwords imported successfully.\033[0m"
 			echo ""
 			exit
 		else
 			echo ""
-			echo -e "\033[1;33mO arquivo \033[1;32mbackup.vps \033[1;33mnão foi encontrado!\033[0m"
-			echo -e "\033[1;33mCeritifique-se que ele esteja localizado no diretório /root/ com o nome \033[1;32mbackup.vps\033[0m"
+			echo -e "\033[1;33mO archive \033[1;32mbackup.vps \033[1;33m was not found!\033[0m"
+			echo -e "\033[1;33m Make sure it is located in the directory /root/ with the name \033[1;32mbackup.vps\033[0m"
 			echo ""
 			exit
 		fi
