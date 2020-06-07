@@ -2,7 +2,7 @@
 clear
 IP=$(wget -qO- ipv4.icanhazip.com)
 arq="/etc/Plus-torrent"
-echo -e "\E[44;1;37m           FIREWALL BLOQUEIO TORRENT           \E[0m"
+echo -e "\E[44;1;37m           FIREWALL BLOCK TORRENT           \E[0m"
 echo ""
 if [[ -e "$arq" ]]; then
 	fun_fireoff () {
@@ -34,26 +34,26 @@ fun_spn1 () {
 		done
 		tput cnorm
 	}
-	echo -ne "\033[1;31mREMOVENDO FIREWALL\033[1;32m.\033[1;33m.\033[1;31m. \033[1;32m"
+	echo -ne "\033[1;31mREMOVING FIREWALL\033[1;32m.\033[1;33m.\033[1;31m. \033[1;32m"
 	helice
 	echo -e "\e[1DOk"
 }
-read -p "$(echo -e "\033[1;32mDESEJA REMOVER REGRAS FIREWALL? \033[1;33m[s/n]:\033[1;37m") " -e -i n resp
+read -p "$(echo -e "\033[1;32m DO YOU WANT TO REMOVE FIREWALL RULES? \033[1;33m[s/n]:\033[1;37m") " -e -i n resp
 if [[ "$resp" = 's' ]]; then
 	echo ""	
 	fun_spn1
 	echo ""
-	echo -e "\033[1;33mTORRENT LIBERADO !\033[0m"
+	echo -e "\033[1;33mTORRENT RELEASED !\033[0m"
 	echo ""
-	echo -e "\033[1;32mFIREWALL REMOVIDO COM SUCESSO !"
+	echo -e "\033[1;32mSUCCESSFULLY REMOVED FIREWALL !"
 	echo ""
 	if [[ -e /etc/openvpn/openvpn-status.log ]]; then
-		echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m REINICIE O SISTEMA PRA CONCLUIR"
+		echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m RESTART THE SYSTEM TO COMPLETE"
 		echo ""
-		read -p "$(echo -e "\033[1;32mREINICIAR AGORA \033[1;31m? \033[1;33m[s/n]:\033[1;37m ")" -e -i s respost
+		read -p "$(echo -e "\033[1;32m RESTART NOW \033[1;31m? \033[1;33m[s/n]:\033[1;37m ")" -e -i s respost
 		echo ""
 		if [[ "$respost" = 's' ]]; then
-			echo -ne "\033[1;31mReiniciando" 
+			echo -ne "\033[1;31m Restarting" 
 			for i in $(seq 1 1 5); do
 				echo -n "."
 				sleep 01
@@ -69,15 +69,15 @@ else
 	menu
 fi
 else
-echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m FUNCAO BETA ULTILIZE POR SUA CONTA EM RISCO"
+echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m FUNCTION BETA ULTILIZE AT YOUR OWN RISK"
 echo ""
-read -p "$(echo -ne "\033[1;32mDESEJA APLICAR REGRAS FIREWALL ? \033[1;33m[s/n]:\033[1;37m") " -e -i n resp
+read -p "$(echo -ne "\033[1;32m DO YOU WANT TO APPLY FIREWALL RULES? \033[1;33m[s/n]:\033[1;37m") " -e -i n resp
 if [[ "$resp" = 's' ]]; then
 echo ""
-echo -ne "\033[1;33mPARA CONTINUAR CONFIRME SEU IP: \033[1;37m"; read -e -i $IP IP
+echo -ne "\033[1;33m TO CONTINUE CONFIRM YOUR IP: \033[1;37m"; read -e -i $IP IP
 if [[ -z "$IP" ]];then
 echo ""
-echo -e "\033[1;31mIP invalido\033[1;32m"
+echo -e "\033[1;31m Invalid IP \033[1;32m"
 sleep 1
 echo ""
 read -p "Digite seu IP: " IP
@@ -152,15 +152,15 @@ fun_spn2 () {
 		done
 		tput cnorm
 	}
-	echo -ne "\033[1;32mAPLICANDO FIREWALL\033[1;32m.\033[1;33m.\033[1;31m. \033[1;32m"
+	echo -ne "\033[1;32m APPLYING FIREWALL\033[1;32m.\033[1;33m.\033[1;31m. \033[1;32m"
 	helice
 	echo -e "\e[1DOk"
 }
 fun_spn2
 echo ""
-echo -e "\033[1;33mBLOQUEIO\033[1;37m TORRENT \033[1;33mAPLICADO !\033[0m"
+echo -e "\033[1;33m BLOCK\033[1;37m TORRENT \033[1;33m APPLIED !\033[0m"
 echo ""
-echo -e "\033[1;32mFIREWALL APLICADO COM SUCESSO !"
+echo -e "\033[1;32m FIREWALL SUCCESSFULLY APPLIED!"
 sleep 3
 menu
 else
